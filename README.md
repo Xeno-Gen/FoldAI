@@ -9,7 +9,7 @@
 
 ## ✨ Features
 
-- 🤖 **Multi-Model Support** - DeepSeek, Kimi, Zhipu, Qwen, ChatGPT, Gemini & more
+- 🤖 **Multi-Model Support** - ChatGPT, Gemini, MimiMax, DeepSeek, Xiaomimomo, Kimi, Zhipu, Qwen
 - 🔌 **Plugin System** - Python function plugins for custom extensions
 - 🧹 **No Prompt Pollution** - Clean conversations, no redundant prompt interference
 - 📁 **File Management** - Public folder read/write, upload/download, directory management
