@@ -1,61 +1,51 @@
 # Fold AI
 
-**Lightweight AI Framework · Clean Conversation · Plugin Extensible**
+### Lightweight AI Framework · Clean Conversation · Plugin Extensible
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Node](https://img.shields.io/badge/Node-v24.11.1-green.svg)](https://nodejs.org/)
-[![Python](https://img.shields.io/badge/Python-3.12.10-blue.svg)](https://python.org/)
-[![Windows](https://img.shields.io/badge/Windows-Supported-0078D6.svg)](https://microsoft.com/windows)
+https://img.shields.io/badge/license-MIT-blue.svg
+https://img.shields.io/badge/Node-v24.11.1-green.svg
+https://img.shields.io/badge/Python-3.12.10-blue.svg
 
-## ✨ Features
+## ✨ Key Features
 
-- 🤖 **Multi-Model Support** - ChatGPT, Gemini, MimiMax, DeepSeek, Xiaomimomo, Kimi, Zhipu, Qwen
-- 🔌 **Plugin System** - Python function plugins for custom extensions
-- 🧹 **No Prompt Pollution** - Clean conversations, no redundant prompt interference
-- 📁 **File Management** - Public folder read/write, upload/download, directory management
-- 💬 **Conversation Management** - History, branching, edit & regenerate messages
-- 👥 **User System** - Register/login, private messaging, online status
-- 🛡️ **Admin Control** - User management, plugin control, permission settings
-- 🎨 **Beautiful UI** - Dark mode, custom themes, smooth animations
+· **📦 Ultra Lightweight —— Only 150KB compressed package**
+· **💻 Cross-Platform —— Runs on Linux, Windows, Android ARM**
+· **🧠 Low Memory Footprint —— Only 65MB RAM usage, runs on 128MB Linux devices**
+· **🌐 Traffic Efficient —— All icons/images use frontend static CDN, minimal egress traffic, suitable as core server service**
+· **🛠️ Admin Panel —— User management, plugin control, permission settings**
+· **🔌 Plugin System —— OpenAI-compatible interface, Python function plugins, clear logging**
+· **🚀 Emerging API Support —— Quickly adapt to new AI service providers**
+· **🤖 Multi-Model Support —— ChatGPT, Gemini, DeepSeek, Kimi, Zhipu, Qwen, and more**
 
-## 🚀 Quick Start (Windows)
+## 🚀 Quick Start
 
 ### Requirements
 
-- Node.js v24.11.1
-- Python 3.12.10
+·**Node.js v24.11.1**
+·**Python 3.12.10**
 
-### One-Click Launch
+## One-Click Launch (Windows)
 
-Double-click **`点我启动.bat`** - automatically installs dependencies and starts the server
+### Double-click 点我启动.bat — automatically installs dependencies and starts the server
 
-### Manual Launch
+## Manual Launch
 
-```bash
-cd directory
-npm install
-npm start
-```
+**```bash**
+**cd fold**
+***npm install**
+**npm start**
+**```**
 
-Visit `http://localhost:17923`
+## Visit http://localhost:17923
 
-## 📁 Project Structure
+## ⚠️ Security Notice
 
-```
-Fold-AI/
-├── 点我启动.bat       # Windows one-click startup script
-├── server.js          # Main server
-├── Mod/               # Plugins directory
-├── data/              # User data
-├── public/            # Public files
-├── ken/               # Documentation
-└── com/               # Configuration directory
-```
+*This project is in early development stage. Until security hardening is complete, do not expose this service directly to the public internet. Recommended for local or trusted LAN deployment only to prevent API key leakage.*
 
 ## 📝 License
 
-MIT © Xeno-Gen
+### MIT © Xeno-Gen
 
 ## 🔗 Links
 
-- [GitHub](https://github.com/Xeno-Gen/Fold-AI)
+### · GitHub
