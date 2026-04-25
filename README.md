@@ -1,3 +1,4 @@
+```markdown
 # 🚀 Fold.ai
 
 **极速 · 便携 · 全平台 AI 对话客户端（Web GUI）**
@@ -26,12 +27,12 @@
 - 📦 **极致轻量**：源码压缩后仅 **44KB**，原生 JavaScript 运行，无需庞大依赖。
 - 🧠 **内存友好**：Node.js 进程内存占用低至 **20MB**，老旧设备也能流畅运行。
 - 🌍 **全平台支持**：只要有 Node.js (v20 – v25.9.0)，Windows / macOS / Linux 均可使用。
-- 🔌 **12 大模型提供商**：一个密钥都不少，覆盖主流 AI 平台。
+- 🔌 **13 大模型提供商**：国产模型 + 海外主流，一站式接入。
 - 📱 **响应式设计**：针对手机触摸优化，聊天界面在移动端同样舒适。
 - ✏️ **对话自由编辑**：随时修改用户发言或模型回复，控制上下文再继续生成。
 - 🔄 **重新生成**：不满意就重试，一键换一个回答。
 - 📋 **动态模型列表**：实时请求提供商的最新可用模型，随时切换。
-- ⚙️ **自定义参数**：温度（temperature）、最大 Token、Top-p 等，完全开放调整。
+- ⚙️ **前端实时调参**：API 密钥、temperature、max_tokens 等全部在 Web 界面手动配置，无需编辑文件。
 - 🍪 **轻量会话管理**：仅使用 Cookie 标记用户身份，无数据库、无登录体系，极致简便。
 
 ---
@@ -54,27 +55,27 @@
 git clone https://github.com/yourusername/fold-ai.git
 cd fold-ai
 ```
-或直接下载已编译的 `fold-ai.min.js`（仅 44KB）从 [Releases 页面](https://github.com/yourusername/fold-ai/releases)。
+或直接下载已编译的压缩包，解压即用。
 
 ### 2. 配置 API 密钥
-在项目根目录创建 `.env` 文件，填入你要使用的提供商密钥：
-```env
-OPENAI_API_KEY=sk-****
-ANTHROPIC_API_KEY=sk-ant-****
-# ... 其他密钥见提供商列表
-```
+**无需编辑任何文件！** 启动后打开 Web 界面，在设置面板中手动填入各提供商的 API 密钥，即填即用。
 
 ### 3. 运行（无需安装依赖）
-项目已编译为原生 JavaScript，可直接启动：
+项目已编译为原生 JavaScript，任选一种方式启动：
+
+**Windows 用户**：直接双击 `start.bat`
+
+**命令行用户**：
 ```bash
-node dist/server.js
-# 或使用预编译的单文件
-node fold-ai.min.js
+cd fold/bin
+node server.js
 ```
-启动后，在浏览器中访问 `http://localhost:3000`，即刻体验。
+
+启动后，浏览器访问 `http://localhost:17923`，即刻体验。
 
 > 🧪 若想从 TypeScript 源码构建：  
 > ```bash
+> cd fold
 > npm install
 > npm run build
 > node dist/server.js
@@ -82,24 +83,25 @@ node fold-ai.min.js
 
 ---
 
-## 🤖 支持的 AI 提供商（12 家）
+## 🤖 支持的 AI 提供商（13 家）
 
-| 编号 | 提供商 | 环境变量配置 |
-|------|--------|--------------|
-| 1 | OpenAI | `OPENAI_API_KEY` |
-| 2 | Azure OpenAI | `AZURE_API_KEY` |
-| 3 | Anthropic (Claude) | `ANTHROPIC_API_KEY` |
-| 4 | Google Generative AI | `GOOGLE_API_KEY` |
-| 5 | Groq | `GROQ_API_KEY` |
-| 6 | DeepSeek | `DEEPSEEK_API_KEY` |
-| 7 | Cohere | `COHERE_API_KEY` |
-| 8 | Together AI | `TOGETHER_API_KEY` |
-| 9 | Fireworks AI | `FIREWORKS_API_KEY` |
-| 10 | Perplexity | `PERPLEXITY_API_KEY` |
-| 11 | Mistral AI | `MISTRAL_API_KEY` |
-| 12 | xAI (Grok) | `XAI_API_KEY` |
+| 编号 | 提供商 | 说明 |
+|------|--------|------|
+| 1 | DeepSeek | 国产顶尖推理模型 |
+| 2 | Kimi | 月之暗面长文本模型 |
+| 3 | 智谱清言 | 清华智谱 GLM 系列 |
+| 4 | Qwen | 阿里通义千问 |
+| 5 | ChatGPT | OpenAI 官方 |
+| 6 | Gemini | Google 多模态模型 |
+| 7 | 硅基流动 | SiliconFlow 模型聚合 |
+| 8 | Claude | Anthropic 出品 |
+| 9 | MiniMax | 海螺AI |
+| 10 | 小米MiMo | 小米自研模型 |
+| 11 | Ollama | 本地模型运行平台 |
+| 12 | llama.cpp | 本地 CPU 推理引擎 |
+| 13 | *(更多接入中)* | — |
 
-在 `.env` 文件中填入你要使用的密钥，即可切换。
+所有提供商的密钥、URL 均通过前端界面配置，灵活切换。
 
 ---
 
@@ -107,11 +109,12 @@ node fold-ai.min.js
 
 - **对话式聊天** —— 自然的多轮对话，上下文集于一身。
 - **编辑消息** —— 双击任意用户或模型消息，直接修改内容，后续回答基于新上下文。
-- **重新输出** —— 点击“重新生成”按钮，让模型再答一次。
-- **请求模型列表** —— 选择提供商后，自动拉取可用模型名称，如 `gpt-4o`、`claude-3-opus`。
-- **自定义参数面板** —— 实时调节 `temperature`、`max_tokens`、`top_p` 等。
+- **重新输出** —— 点击"重新生成"按钮，让模型再答一次。
+- **请求模型列表** —— 选择提供商后，自动拉取可用模型名称。
+- **前端参数面板** —— 在 Web 界面实时调节 `temperature`、`max_tokens`、`top_p` 等。
+- **前端密钥管理** —— API 密钥全部在浏览器端配置，`.env` 只保留服务级默认值。
 - **响应式 Web 界面** —— 桌面、平板、手机均自适应，触摸操作流畅。
-- **极简部署** —— 复制一个 44KB 的 JS 文件到任何装有 Node 的机器，直接跑。
+- **极简部署** —— 解压即用，双击 bat 或一行 node 命令即可跑。
 - **Cookie 用户标记** —— 打开浏览器即自动分配身份，无需注册登录，会话独立。
 
 ---
@@ -120,23 +123,8 @@ node fold-ai.min.js
 
 > Fold.ai 的初始版本 **完全由 DeepSeek-v4-pro 在 20 分钟内编码完成**，未做任何手动大改。  
 > 这证明了 AI 已经能够从零构建轻量、可用的全栈应用。  
-> 你手中的每一个功能，从 12 家提供商的集成到手机端 UI，都是 AI 在“分分钟”内输出的成果。  
+> 你手中的每一个功能，从 13 家提供商的集成到手机端 UI，都是 AI 在"分分钟"内输出的成果。  
 > **这不是未来，这就是现在。**
-
----
-
-## 📂 项目结构（压缩后仅 44KB）
-
-```
-fold-ai/
-├── src/                # TypeScript 源码
-│   ├── server.ts       # 轻量 HTTP 服务器 (含 Cookie 会话)
-│   ├── providers/      # 12 家 AI 提供商适配
-│   └── client/         # 前端 Web GUI（原生 JS）
-├── dist/               # 编译后的纯 JS 文件
-│   └── server.js       # 可以直接 node 运行
-└── fold-ai.min.js      # 单文件压缩版（44KB）
-```
 
 ---
 
@@ -153,6 +141,6 @@ MIT © 2025 Fold.ai 贡献者
 
 ---
 
-**⭐ 如果这个“20 分钟作品”让你觉得有趣，请点亮 Star！**  
+**⭐ 如果这个"20 分钟作品"让你觉得有趣，请点亮 Star！**  
 **让更多人看到 AI + TypeScript 的极致轻量魅力。**
 ```
