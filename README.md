@@ -1,3 +1,4 @@
+```markdown
 # 🚀 Fold.ai
 
 **极速 · 便携 · 全平台 AI 对话客户端（Web GUI）**
@@ -13,8 +14,8 @@
 <details open>
 <summary>📸 界面预览（手机端友好）</summary>
 
-![screenshot](https://via.placeholder.com/400x800?text=Fold.ai+Mobile+Chat)  
-*（实际截图请替换为你的预览图）*
+<img width="1599" height="813" alt="桌面端截图" src="https://github.com/user-attachments/assets/27ca4729-a9ad-4ef5-9b48-34afa6a8b91b" />
+<img width="1592" height="807" alt="移动端截图" src="https://github.com/user-attachments/assets/9b712cff-48e1-4181-91aa-b87b7eaf6ee2" />
 
 </details>
 
@@ -32,7 +33,14 @@
 - 🔄 **重新生成**：不满意就重试，一键换一个回答。
 - 📋 **动态模型列表**：实时请求提供商的最新可用模型，随时切换。
 - ⚙️ **自定义参数**：温度（temperature）、最大 Token、Top-p 等，完全开放调整。
-- 🔐 **零数据库**：会话数据仅保存在浏览器本地，隐私安全。
+- 🍪 **轻量会话管理**：仅使用 Cookie 标记用户身份，无数据库、无登录体系，极致简便。
+
+---
+
+> ⚠️ **安全提醒**  
+> 本项目通过 **Cookie** 进行简单的用户区分，**未实现**复杂的身份认证或权限控制。  
+> 请不要在生产环境或公网直接部署，也不要在不信任的网络中传输敏感信息。  
+> 这是一个为本地/内网个人使用设计的极客工具，**安全不是它的目标，轻量和速度才是**。
 
 ---
 
@@ -49,7 +57,15 @@ cd fold-ai
 ```
 或直接下载已编译的 `fold-ai.min.js`（仅 44KB）从 [Releases 页面](https://github.com/yourusername/fold-ai/releases)。
 
-### 2. 运行（无需安装依赖）
+### 2. 配置 API 密钥
+在项目根目录创建 `.env` 文件，填入你要使用的提供商密钥：
+```env
+OPENAI_API_KEY=sk-****
+ANTHROPIC_API_KEY=sk-ant-****
+# ... 其他密钥见提供商列表
+```
+
+### 3. 运行（无需安装依赖）
 项目已编译为原生 JavaScript，可直接启动：
 ```bash
 node dist/server.js
@@ -97,6 +113,7 @@ node fold-ai.min.js
 - **自定义参数面板** —— 实时调节 `temperature`、`max_tokens`、`top_p` 等。
 - **响应式 Web 界面** —— 桌面、平板、手机均自适应，触摸操作流畅。
 - **极简部署** —— 复制一个 44KB 的 JS 文件到任何装有 Node 的机器，直接跑。
+- **Cookie 用户标记** —— 打开浏览器即自动分配身份，无需注册登录，会话独立。
 
 ---
 
@@ -114,7 +131,7 @@ node fold-ai.min.js
 ```
 fold-ai/
 ├── src/                # TypeScript 源码
-│   ├── server.ts       # 轻量 HTTP 服务器
+│   ├── server.ts       # 轻量 HTTP 服务器 (含 Cookie 会话)
 │   ├── providers/      # 12 家 AI 提供商适配
 │   └── client/         # 前端 Web GUI（原生 JS）
 ├── dist/               # 编译后的纯 JS 文件
