@@ -50,8 +50,8 @@
 
 ### 1. 获取项目
 ```bash
-git clone https://github.com/yourusername/fold-ai.git
-cd fold-ai
+git clone https://github.com/yourusername/fold.ai.git
+cd fold.ai
 ```
 或直接下载已编译的压缩包，解压即用。
 
@@ -61,7 +61,7 @@ cd fold-ai
 ### 3. 运行（无需安装依赖）
 项目已编译为原生 JavaScript，任选一种方式启动：
 
-**Windows 用户**：直接双击 `start.bat`
+**Windows 用户**：直接双击 `.bat`
 
 **命令行用户**：
 ```bash
