@@ -14,7 +14,6 @@
 <summary>📸 界面预览（手机端友好）</summary>
 
 <img width="1599" height="813" alt="桌面端截图" src="https://github.com/user-attachments/assets/27ca4729-a9ad-4ef5-9b48-34afa6a8b91b" />
-<img width="1592" height="807" alt="移动端截图" src="https://github.com/user-attachments/assets/9b712cff-48e1-4181-91aa-b87b7eaf6ee2" />
 
 </details>
 
