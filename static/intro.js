@@ -108,6 +108,7 @@ const chatFileBtn = $('chatFileBtn'),
         currentChat = 0;
     let activeFiles = { initial: [], chat: [] };
     let streaming = false;
+    let isUserScrolledAway = false;
     let currentAbortController = null;
     let currentProvider = null;
     let currentModel = 'deepseek-v4-flash';
@@ -1392,6 +1393,7 @@ const chatFileBtn = $('chatFileBtn'),
 
     // 开始流式获取
     streaming = true;
+    isUserScrolledAway = false;  // 新输出开始时，重新跟随视角
     updateSendBtn();
 
     const reasonSteps = getReasonSteps();
@@ -1514,7 +1516,7 @@ const chatFileBtn = $('chatFileBtn'),
                             } catch (e) {}
                         }
                     }
-                    chatArea.scrollTop = chatArea.scrollHeight;
+                    if (!isUserScrolledAway) chatArea.scrollTop = chatArea.scrollHeight;
                 }
 
                 stepResults.push(stepContent);
@@ -1640,7 +1642,7 @@ const chatFileBtn = $('chatFileBtn'),
                     } catch (e) {}
                 }
             }
-            chatArea.scrollTop = chatArea.scrollHeight;
+            if (!isUserScrolledAway) chatArea.scrollTop = chatArea.scrollHeight;
         }
 
         const assistantMsg = { role: 'assistant', content: fullContent, reasoning: fullReasoning || null };
@@ -2397,6 +2399,13 @@ chatSend.onclick = () => {
                 }
             };
         }
+
+        // 滚动检测：用户向上滚动则松开自动跟随，滚回底部则重新锁定
+        chatArea.addEventListener('scroll', () => {
+            const threshold = 40;
+            const atBottom = chatArea.scrollHeight - chatArea.scrollTop - chatArea.clientHeight < threshold;
+            isUserScrolledAway = !atBottom;
+        });
 
 if (sidebarToggle) {
     sidebarToggle.onclick = () => {

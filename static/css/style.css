@@ -589,8 +589,7 @@ input:checked + .slider::before {
 }
 
 .sidebar-left.expanded .sidebar-bottom {
-    justify-content: flex-start;
-    padding: 8px 4px;
+    padding: 8px 12px 16px;
 }
 
 .sidebar-settings-btn {
@@ -605,11 +604,41 @@ input:checked + .slider::before {
     cursor: pointer;
     color: #777;
     transition: var(--transition, 0.3s cubic-bezier(0.4,0,0.2,1));
+    flex-shrink: 0;
 }
 
 .sidebar-settings-btn:hover {
     background: #f0f0f0;
     color: #1a1a1a;
+}
+
+/* 展开时变成长条按钮，类似"新对话" */
+.sidebar-left.expanded .sidebar-settings-btn {
+    width: 100%;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border, #e6e6e6);
+    background: #fff;
+    justify-content: flex-start;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a1a1a;
+    white-space: nowrap;
+}
+
+.sidebar-left.expanded .sidebar-settings-btn:hover {
+    background: #f9f9f9;
+    border-color: #d5d5d5;
+}
+
+.sidebar-settings-label {
+    display: none;
+}
+
+.sidebar-left.expanded .sidebar-settings-label {
+    display: inline;
 }
 
 /* ========== 设置模态框 ========== */

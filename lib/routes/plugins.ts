@@ -276,8 +276,9 @@ pluginsRouter.post('/plugin/command/execute', (req: Request, res: Response) => {
         }
     }
 
+    // 强制统一为UTF-8编码输出
     const shellCommand = shell === 'powershell'
-        ? `powershell.exe -NoProfile -Command "[Console]::OutputEncoding=[Text.Encoding]::UTF8; ${command.replace(/"/g, '\\"')}"`
+        ? `powershell.exe -NoProfile -Command "$OutputEncoding=[Console]::OutputEncoding=[Text.Encoding]::UTF8; ${command.replace(/"/g, '\\"')}"`
         : `cmd.exe /c "chcp 65001>nul && ${command.replace(/"/g, '\\"')}"`;
 
     const startTime = Date.now();
@@ -285,18 +286,34 @@ pluginsRouter.post('/plugin/command/execute', (req: Request, res: Response) => {
     exec(shellCommand, {
         timeout: execTimeout,
         cwd: workDir,
-        maxBuffer: 1024 * 1024, // 1MB
+        maxBuffer: 1024 * 1024,
         windowsHide: true,
         encoding: 'buffer',
     }, (error, stdout, stderr) => {
         const duration = Date.now() - startTime;
 
-        // 解码输出: 先尝试UTF-8，如果含替换字符则用GBK(CP936)
+        // 统一解码为UTF-8: 先尝试UTF-8，检测到乱码则用GBK(CP936)重试
         const decode = (buf: Buffer): string => {
             if (!buf || buf.length === 0) return '';
             const utf8 = buf.toString('utf-8');
-            if (!utf8.includes('�')) return utf8;
-            try { return new TextDecoder('gbk').decode(buf); } catch { return utf8; }
+            // 包含替换字符 → 非法UTF-8 → 用GBK
+            if (utf8.includes('�')) {
+                try { return new TextDecoder('gbk').decode(buf); } catch { return utf8; }
+            }
+            // 无替换字符 + 非ASCII字符较多时检测是否GBK被误解为UTF-8
+            // GBK→UTF-8 误解码会产生大量拉丁扩展区字符(0x80-0x2FF)，而非CJK字符
+            const chars = [...utf8];
+            const nonAscii = chars.filter(c => c.charCodeAt(0) > 127);
+            if (nonAscii.length > 2) {
+                const latinCount = nonAscii.filter(c => {
+                    const code = c.charCodeAt(0);
+                    return code >= 0x80 && code <= 0x02FF;
+                }).length;
+                if (latinCount / nonAscii.length > 0.6) {
+                    try { return new TextDecoder('gbk').decode(buf); } catch { return utf8; }
+                }
+            }
+            return utf8;
         };
 
         const result: any = {
