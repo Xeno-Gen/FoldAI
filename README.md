@@ -58,7 +58,7 @@
 ### 1. 获取项目
 ```bash
 git clone https://github.com/yourusername/fold.ai.git
-cd fold.ai
+cd fold
 ```
 或直接下载已编译的压缩包，解压即用。
 
