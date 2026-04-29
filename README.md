@@ -138,7 +138,7 @@ node server.js
 
 ## 📄 许可证
 
-MIT © 2025 Fold.ai 贡献者  
+MIT © 2026 Fold.ai 贡献者  
 *初版代码由 DeepSeek-v4-pro 生成。*
 
 ---
